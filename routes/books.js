@@ -21,7 +21,7 @@ exports.list = () => {
 
 
 let books = JSON.parse(read_json_file());
-
+let books2=JSON.parse(read_json_file());
 // var books = [{
 //   "Title": "Lord of the Rings",
 //   "Author": "J.R.R Tolkien",
@@ -61,7 +61,7 @@ router.use((req, res, next) => {
 router.get('/team', (req, res) => {
   res.json({ "member 1": "C B Layamitra",
               "member 2": "Kritika M Pai",
-            "member 2":"Mohammad Ashhar Arif"  })
+            "member 3":"Mohammad Ashhar Arif"  })
 })
 
 // define the home page route
@@ -69,24 +69,31 @@ router.get('/', (req, res) => {
   res.json({ "hello": "there" })
 })
 // define the about route
-router.get('/all/:location', (req, res) => {
-
+router.get('/all/:location?', (req, res) => {
+  books2=JSON.parse(read_json_file())
   location = req.params.location
-  if (location == "raleigh")
-    for (item in books) {
-      item.price += 0.075 * item.price
+  if(location)
+  {
+    location = location.toLocaleLowerCase();
+    if (location == "raleigh")
+      for (item in books2) {
+        books2[item].price += 0.075 * books2[item].price
+      }
+    else if (location == "durham")
+      for (item in books) {
+        books2[item].price += 0.08 * books2[item].price
+        
+      }
+    else {
+      res.send("wrong data")
+      return
     }
-  else if (location == "durham")
-    for (item in books) {
-      item.price += 0.08 * item.price
-    }
-  else {
-    res.send("wrong data")
-    return
+    
+
   }
 
-
-  res.send(books)
+  res.send(books2)
+  books2=books
 })
 
 router.post('/', (req, res) => {
