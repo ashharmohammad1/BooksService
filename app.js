@@ -4,7 +4,8 @@ const app=express();
 const PORT= 3034;
 const books = require('./routes/books')
 
-app.use('/foods',books)
+app.use(express.json())
+app.use('/books',books)
 
 
 
