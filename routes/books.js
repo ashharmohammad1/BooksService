@@ -59,8 +59,8 @@ router.use((req, res, next) => {
 })
 
 router.get('/team', (req, res) => {
-  res.json({ "team": "Team books Backend",
-              "membersName":["CB Layamitra","Krithika M Pai","Mohammad Ashhar Arif"] })
+  res.json({ "team": "Books",
+              "membersNames":["CB Layamitra","Krithika M Pai","Mohammad Ashhar Arif"] })
 })
 
 // define the home page route
